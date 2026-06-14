@@ -11,9 +11,9 @@ fi
 for package in $@
  do 
     echo "installing $package"
-    dnf list installing $package
+    dnf list installing $package &>>$LOGS_FILE
  if [ $? -ne 0 ]; then 
-    dnf install $package -y
+    dnf install $package -y &>>$LOGS_FILE
  else
     echo "$package already installed ... SKIPPING"
 fi
