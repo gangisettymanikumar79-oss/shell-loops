@@ -9,10 +9,16 @@ if [ $UserID -ne 0 ]; then
    exit 1
 fi
 for package in $@
-if [ $? -ne 0 ]; then
-    do 
-        echo "installing $package"
-        dnf list installing $package
-    done
+ do 
+    echo "installing $package"
+    dnf list installing $package
+ if [ $? -ne 0 ]; then 
+    dnf install $package -y
+ else
+    echo "$package already installed ... SKIPPING"
+fi
+ done
+
+
 
 
